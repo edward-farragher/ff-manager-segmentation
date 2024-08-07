@@ -62,7 +62,7 @@ def create_distribution_table_categorical(df, column_name):
     return distribution_table
 
 
-def create_distribution_tables_aggregated(df):
+def create_distribution_tables_aggregated(df, impute_nulls):
 
     column_data_types = {
         "player_region_iso_code_long": "categorical",
@@ -89,18 +89,8 @@ def create_distribution_tables_aggregated(df):
         "rising_score": "numeric"
     }
 
-    # Dictionary with fill values for each column
-    fill_values = {
-        "career_break_history": 0,
-        "kit": "No Kit",
-        "kit": "No Kit",
-        "kit_shirt_type": "No Kit Shirt",
-        "kit_shirt_logo": "No Kit Logo",
-        "kit_socks_type": "No Kit Socks",
-    }
-
     # Fill NaN values in each column with specified values
-    df = df.fillna(value=fill_values)
+    df = df.fillna(value=impute_nulls)
 
     distribution_table_numeric = pd.DataFrame(
         columns=[

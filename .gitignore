@@ -2,6 +2,7 @@
 #data/variable_distributions/*
 data/sample/*
 data/vaastav-data/*
+**/__pycache__/
 
 # Do not ignore the .gitkeep files to ensure directories are tracked
 !data/profile_look_up/categorical/.gitkeep
