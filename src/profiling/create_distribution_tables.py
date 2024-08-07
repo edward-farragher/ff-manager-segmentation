@@ -29,8 +29,12 @@ def create_distribution_table_numeric(df, column_name):
     )
 
     # Round percentages
-    distribution_table["percentage_above"] = distribution_table["percentage_above"].round(3)
-    distribution_table["percentage_below"] = distribution_table["percentage_below"].round(3)
+    distribution_table["percentage_above"] = distribution_table[
+        "percentage_above"
+    ].round(3)
+    distribution_table["percentage_below"] = distribution_table[
+        "percentage_below"
+    ].round(3)
 
     return distribution_table
 
@@ -57,13 +61,14 @@ def create_distribution_table_categorical(df, column_name):
     )
 
     # Round percentages
-    distribution_table["percentage_share"] = distribution_table["percentage_share"].round(3)
+    distribution_table["percentage_share"] = distribution_table[
+        "percentage_share"
+    ].round(3)
 
     return distribution_table
 
 
 def create_distribution_tables_aggregated(df, impute_nulls):
-
     column_data_types = {
         "player_region_iso_code_long": "categorical",
         "name_change_blocked": "categorical",
@@ -86,7 +91,7 @@ def create_distribution_tables_aggregated(df, impute_nulls):
         "career_break_history": "numeric",
         "seasons_played_in": "numeric",
         "yoyo_score": "numeric",
-        "rising_score": "numeric"
+        "rising_score": "numeric",
     }
 
     # Fill NaN values in each column with specified values
@@ -120,11 +125,12 @@ def create_distribution_tables_aggregated(df, impute_nulls):
                 [distribution_table_numeric, distribution_table_stage_numeric], axis=0
             )
         elif column_type == "categorical":
-            distribution_table_stage_categorical = create_distribution_table_categorical(
-                df=df, column_name=column_name
+            distribution_table_stage_categorical = (
+                create_distribution_table_categorical(df=df, column_name=column_name)
             )
             distribution_table_categorical = pd.concat(
-                [distribution_table_categorical, distribution_table_stage_categorical], axis=0
+                [distribution_table_categorical, distribution_table_stage_categorical],
+                axis=0,
             )
         else:
             pass
