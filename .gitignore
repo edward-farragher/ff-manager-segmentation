@@ -1,0 +1,5 @@
+# Ignore data files
+data/profile_look_up/categorical/*
+data/profile_look_up/numeric/*
+data/sample/*
+data/vaastav-data/*
