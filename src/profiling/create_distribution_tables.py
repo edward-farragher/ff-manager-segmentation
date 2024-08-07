@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-def create_lookup_table_numeric(df, column_name):
+def create_distribution_table_numeric(df, column_name):
     # Calculate the total number of non-NaN rows
     total_non_nan_rows = len(df[column_name].dropna())
 
@@ -17,8 +17,8 @@ def create_lookup_table_numeric(df, column_name):
     cumulative_counts_below = value_counts.sort_index(ascending=True).cumsum()
     percentage_below = (cumulative_counts_below / total_non_nan_rows) * 100
 
-    # Create the lookup table
-    lookup_table = pd.DataFrame(
+    # Create the distribution table
+    distribution_table = pd.DataFrame(
         {
             "column_name": column_name,
             "value": value_counts.index,
@@ -29,18 +29,18 @@ def create_lookup_table_numeric(df, column_name):
     )
 
     # Round percentages
-    lookup_table["percentage_above"] = lookup_table["percentage_above"].round(3)
-    lookup_table["percentage_below"] = lookup_table["percentage_below"].round(3)
+    distribution_table["percentage_above"] = distribution_table["percentage_above"].round(3)
+    distribution_table["percentage_below"] = distribution_table["percentage_below"].round(3)
 
-    return lookup_table
+    return distribution_table
 
 
-def create_lookup_table_categorical(df, column_name):
+def create_distribution_table_categorical(df, column_name):
     # Calculate the proportion of each unique value
     percentage_share = df[column_name].value_counts(normalize=True)
 
-    # Create lookup table
-    lookup_table = pd.DataFrame(
+    # Create distribution table
+    distribution_table = pd.DataFrame(
         {
             "column_name": column_name,
             "value": percentage_share.index,
@@ -49,20 +49,46 @@ def create_lookup_table_categorical(df, column_name):
     )
 
     # Add ranks
-    lookup_table["rank_ascending"] = lookup_table["percentage_share"].rank(
+    distribution_table["rank_ascending"] = distribution_table["percentage_share"].rank(
         method="min", ascending=True
     )
-    lookup_table["rank_descending"] = lookup_table["percentage_share"].rank(
+    distribution_table["rank_descending"] = distribution_table["percentage_share"].rank(
         method="min", ascending=False
     )
 
     # Round percentages
-    lookup_table["percentage_share"] = lookup_table["percentage_share"].round(3)
+    distribution_table["percentage_share"] = distribution_table["percentage_share"].round(3)
 
-    return lookup_table
+    return distribution_table
 
 
-def create_lookup_tables_aggregated(df, column_data_types):
+def create_distribution_tables_aggregated(df):
+
+    column_data_types = {
+        "player_region_iso_code_long": "categorical",
+        "name_change_blocked": "categorical",
+        "kit": "categorical",
+        "kit_shirt_type": "categorical",
+        "kit_shirt_logo": "categorical",
+        "kit_socks_type": "categorical",
+        "kit_full": "categorical",
+        "classic_leagues_competed_in": "numeric",
+        "h2h_leagues_competed_in": "numeric",
+        "last_deadline_bank": "numeric",
+        "last_deadline_value": "numeric",
+        "last_deadline_total_transfers": "numeric",
+        "summary_overall_points": "numeric",
+        "summary_overall_rank": "numeric",
+        "leagues_admin": "numeric",
+        "min_rank_history": "numeric",
+        "max_total_points_history": "numeric",
+        "earliest_season_year_history": "numeric",
+        "career_break_history": "numeric",
+        "seasons_played_in": "numeric",
+        "yoyo_score": "numeric",
+        "rising_score": "numeric"
+    }
+
     # Dictionary with fill values for each column
     fill_values = {
         "career_break_history": 0,
@@ -76,7 +102,7 @@ def create_lookup_tables_aggregated(df, column_data_types):
     # Fill NaN values in each column with specified values
     df = df.fillna(value=fill_values)
 
-    lookup_table_numeric = pd.DataFrame(
+    distribution_table_numeric = pd.DataFrame(
         columns=[
             "column_name",
             "value",
@@ -85,7 +111,7 @@ def create_lookup_tables_aggregated(df, column_data_types):
             "percentage_below",
         ]
     )
-    lookup_table_categorical = pd.DataFrame(
+    distribution_table_categorical = pd.DataFrame(
         columns=[
             "column_name",
             "value",
@@ -97,20 +123,20 @@ def create_lookup_tables_aggregated(df, column_data_types):
 
     for column_name, column_type in column_data_types.items():
         if column_type == "numeric":
-            lookup_table_stage_numeric = create_lookup_table_numeric(
+            distribution_table_stage_numeric = create_distribution_table_numeric(
                 df=df, column_name=column_name
             )
-            lookup_table_numeric = pd.concat(
-                [lookup_table_numeric, lookup_table_stage_numeric], axis=0
+            distribution_table_numeric = pd.concat(
+                [distribution_table_numeric, distribution_table_stage_numeric], axis=0
             )
         elif column_type == "categorical":
-            lookup_table_stage_categorical = create_lookup_table_categorical(
+            distribution_table_stage_categorical = create_distribution_table_categorical(
                 df=df, column_name=column_name
             )
-            lookup_table_categorical = pd.concat(
-                [lookup_table_categorical, lookup_table_stage_categorical], axis=0
+            distribution_table_categorical = pd.concat(
+                [distribution_table_categorical, distribution_table_stage_categorical], axis=0
             )
         else:
             pass
 
-    return lookup_table_numeric, lookup_table_categorical
+    return distribution_table_numeric, distribution_table_categorical
