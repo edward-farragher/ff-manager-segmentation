@@ -1,0 +1,28 @@
+column_name,value,percentage_share,rank_ascending,rank_descending
+player_region_iso_code_long,England,0.4,14.0,1.0
+player_region_iso_code_long,Egypt,0.2,13.0,2.0
+player_region_iso_code_long,South Africa,0.033,1.0,3.0
+player_region_iso_code_long,Nepal,0.033,1.0,3.0
+player_region_iso_code_long,Finland,0.033,1.0,3.0
+player_region_iso_code_long,Norway,0.033,1.0,3.0
+player_region_iso_code_long,Scotland,0.033,1.0,3.0
+player_region_iso_code_long,Spain,0.033,1.0,3.0
+player_region_iso_code_long,Indonesia,0.033,1.0,3.0
+player_region_iso_code_long,Hong Kong,0.033,1.0,3.0
+player_region_iso_code_long,Iceland,0.033,1.0,3.0
+player_region_iso_code_long,Canada,0.033,1.0,3.0
+player_region_iso_code_long,Bhutan,0.033,1.0,3.0
+player_region_iso_code_long,Thailand,0.033,1.0,3.0
+name_change_blocked,False,1.0,1.0,1.0
+kit,False,0.933,2.0,1.0
+kit,True,0.067,1.0,2.0
+kit_shirt_type,No Kit Shirt,0.933,3.0,1.0
+kit_shirt_type,stripes,0.033,1.0,2.0
+kit_shirt_type,plain,0.033,1.0,2.0
+kit_shirt_logo,No Kit Logo,0.933,3.0,1.0
+kit_shirt_logo,no-racism,0.033,1.0,2.0
+kit_shirt_logo,none,0.033,1.0,2.0
+kit_socks_type,No Kit Socks,0.933,2.0,1.0
+kit_socks_type,hoops,0.067,1.0,2.0
+kit_full,False,0.967,2.0,1.0
+kit_full,True,0.033,1.0,2.0
