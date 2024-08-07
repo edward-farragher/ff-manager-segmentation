@@ -1,5 +1,5 @@
 # Ignore all files in the data directories
-data/profile_look_up/*
+data/profile_lookup/*
 data/sample/*
 data/vaastav-data/*
 
