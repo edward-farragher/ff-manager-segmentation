@@ -1,5 +1,11 @@
-# Ignore data files
+# Ignore all files in the data directories
 data/profile_look_up/categorical/*
 data/profile_look_up/numeric/*
 data/sample/*
 data/vaastav-data/*
+
+# Do not ignore the .gitkeep files to ensure directories are tracked
+!data/profile_look_up/categorical/.gitkeep
+!data/profile_look_up/numeric/.gitkeep
+!data/sample/.gitkeep
+!data/vaastav-data/.gitkeep
