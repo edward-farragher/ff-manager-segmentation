@@ -22,8 +22,12 @@ yaml_file_path = "conf/column_data_types.yaml"
 column_data_types = load_yaml_file(yaml_file_path)
 
 # Create profile lookup tables
-lookup_table_numeric, lookup_table_categorical = create_lookup_tables_aggregated(df, column_data_types)
+lookup_table_numeric, lookup_table_categorical = create_lookup_tables_aggregated(
+    df, column_data_types
+)
 
 # Save DataFrame as CSVs
-lookup_table_numeric.to_csv(f'data/profile_lookup/numeric_columns.csv', index=False)
-lookup_table_categorical.to_csv(f'data/profile_lookup/categorical_columns.csv', index=False)
+lookup_table_numeric.to_csv(f"data/profile_lookup/numeric_columns.csv", index=False)
+lookup_table_categorical.to_csv(
+    f"data/profile_lookup/categorical_columns.csv", index=False
+)

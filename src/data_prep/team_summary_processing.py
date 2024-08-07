@@ -68,11 +68,9 @@ def calculate_rank_metrics(team_history_data):
 
     rising_score = -slope[0]  # Negative slope indicates improvement
 
-    
     # Round numbers
     yoyo_score = round(yoyo_score, 3)
     rising_score = round(rising_score, 3)
-
 
     return yoyo_score, rising_score
 
